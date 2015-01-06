@@ -84,6 +84,32 @@
 #define YM 18   // can be a digital pin, this is A0
 #define XP 21   // can be a digital pin, this is A3
 
+#elif defined (__SAM3X8E__)
+/* This code is for ARDUINO DUE variant
+HW configuration:
+- D4 :  RESET
+- D5 :  CS
+- D6 :  D/C
+- D7 :  LED
+- D11 : MOSI
+- D12 : MISO
+- D13 : SCK
+*/
+#define TFT_INIT() { pinMode(4, OUTPUT); pinMode(5, OUTPUT); pinMode(6, OUTPUT);  pinMode(7, OUTPUT); }
+#define TFT_CS_LOW  { digitalWrite(5, LOW); }
+#define TFT_CS_HIGH { digitalWrite(5, HIGH); }
+#define TFT_DC_LOW  { digitalWrite(6, LOW); }
+#define TFT_DC_HIGH { digitalWrite(6, HIGH); }
+#define TFT_BL_OFF  { digitalWrite(7, LOW); }
+#define TFT_BL_ON   { digitalWrite(7, HIGH); }
+#define TFT_RST_OFF { digitalWrite(4, HIGH); }
+#define TFT_RST_ON  { digitalWrite(4, LOW); }
+
+#define YP A2   // must be an analog pin, use "An" notation!
+#define XM A1   // must be an analog pin, use "An" notation!
+#define YM 54   // can be a digital pin, this is A0
+#define XP 57   // can be a digital pin, this is A3
+
 #else
 #define TFT_CS_LOW  {DDRD |= 0x20;PORTD &=~ 0x20;}
 #define TFT_CS_HIGH {DDRD |= 0x20;PORTD |=  0x20;}

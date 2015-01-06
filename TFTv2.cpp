@@ -87,14 +87,23 @@ INT8U TFT::Read_Register(INT8U Addr, INT8U xParameter)
 
 void TFT::TFTinit (void)
 {
+#if defined (__SAM3X8E__)
+    TFT_INIT();
+#endif /* __SAM3X8E__ */
+
     SPI.begin();
+#if defined (__SAM3X8E__)
+    SPI.setDataMode(SPI_MODE0);
+    SPI.setClockDivider(3);
+#endif /* __SAM3X8E__ */
     TFT_CS_HIGH;
     TFT_DC_HIGH;
     INT8U i=0, TFTDriver=0;
 
-	TFT_RST_ON;
-	delay(10);
-	TFT_RST_OFF;
+    TFT_RST_ON;
+    delay(10);
+    TFT_RST_OFF;
+    delay(10);
 
     for(i=0;i<3;i++)
     {
